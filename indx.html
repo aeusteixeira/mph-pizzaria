@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPH Pizzaria - Cardápio Virtual</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ED6711',
+                        secondary: '#1a1a1a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .pizza-table {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .pizza-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid #ED6711;
+        }
+        
+        @media (min-width: 768px) {
+            .pizza-table {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .price-item {
+            text-align: center;
+            padding: 0.5rem;
+            background: #2d2d2d;
+            border-radius: 6px;
+        }
+        
+        .header-shadow {
+            box-shadow: 0 4px 20px rgba(237, 103, 17, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen">
+    <!-- Header Fixo -->
+    <header class="fixed top-0 w-full bg-secondary z-50 header-shadow">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-center">
+                <div class="flex items-center space-x-3">
+                    <i data-feather="pizza" class="text-primary w-8 h-8"></i>
+                    <h1 class="text-xl font-bold">MPH PIZZARIA – Cardápio Virtual</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="pt-20 pb-24 container mx-auto px-4">
+        <!-- Aviso Destaque -->
+        <div class="bg-primary/20 border border-primary/30 rounded-xl p-4 mb-8">
+            <div class="flex items-center">
+                <i data-feather="gift" class="text-primary mr-3"></i>
+                <p class="font-semibold">Refrigerante incluso nas pizzas a partir de 35 cm</p>
+            </div>
+        </div>
+
+        <!-- Pizzas Tradicionais -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                <i data-feather="star" class="mr-2"></i>
+                Pizzas Tradicionais
+            </h2>
+            
+            <div class="pizza-table">
+                <!-- Exemplo de item de pizza - repetir para cada sabor -->
+                <div class="pizza-card">
+                    <h3 class="text-lg font-semibold mb-2">Margherita</h3>
+                    <p class="text-gray-300 text-sm mb-3">Molho de tomate, mussarela, manjericão fresco</p>
+                    <div class="price-grid">
+                        <div class="price-item">
+                            <div class="text-xs text-gray-400">25cm</div>
+                            <div class="font-bold">R$ 35,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="text-xs text-gray-400">35cm</div>
+                            <div class="font-bold">R$ 45,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="text-xs text-gray-400">40cm</div>
+                            <div class="font-bold">R$ 55,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="text-xs text-gray-400">45cm</div>
+                            <div class="font-bold">R$ 65,00</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Adicione mais pizzas tradicionais aqui seguindo o mesmo padrão -->
+            </div>
+        </section>
+
+        <!-- Pizzas Doces -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                <i data-feather="heart" class="mr-2"></i>
+                Pizzas Doces
+            </h2>
+            
+            <div class="pizza-table">
+                <!-- Exemplo de pizza doce - repetir para cada sabor -->
+                <div class="pizza-card">
+                    <h3 class="text-lg font-semibold mb-2">Chocolate com Morango</h3>
+                    <p class="text-gray-300 text-sm mb-3">Chocolate, morangos frescos, leite condensado</p>
+                    <div class="price-grid">
+                        <div class="price-item">
+                            <div class="text-xs text-gray-400">25cm</div>
+                            <div class="font-bold">R$ 40,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="text-xs text-gray-400">35cm</div>
+                            <div class="font-bold">R$ 50,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="text-xs text-gray-400">40cm</div>
+                            <div class="font-bold">R$ 60,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="text-xs text-gray-400">45cm</div>
+                            <div class="font-bold">R$ 70,00</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Adicione mais pizzas doces aqui seguindo o mesmo padrão -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé Fixo -->
+    <footer class="fixed bottom-0 w-full bg-secondary py-4 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-2 md:mb-0">
+                    <p class="text-sm">Rua Exemplo, 123 – Nova Iguaçu, RJ</p>
+                </div>
+                <a href="https://wa.me/5521999999999" class="bg-primary hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full flex items-center transition-colors">
+                    <i data-feather="phone" class="mr-2"></i>
+                    (21) 99999-9999
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Animações simples de entrada
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.pizza-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
