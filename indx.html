@@ -3,194 +3,1026 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MPH Pizzaria - Cardápio Virtual</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#ED6711',
-                        secondary: '#1a1a1a',
-                    }
-                }
-            }
-        }
-    </script>
+    <title>MPH PIZZARIA - Cardápio Virtual</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
         * {
-            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        .pizza-table {
-            display: grid;
-            gap: 1rem;
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        
-        .pizza-card {
-            background: #1a1a1a;
-            border-radius: 12px;
-            padding: 1.5rem;
-            border-left: 4px solid #ED6711;
-        }
-        
-        @media (min-width: 768px) {
-            .pizza-table {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
-        }
-        
-        .price-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .price-item {
+
+        /* Header fixo */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #000000;
+            padding: 15px 20px;
             text-align: center;
-            padding: 0.5rem;
-            background: #2d2d2d;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .logo {
+            color: #ED6711;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 20px 20px;
+        }
+
+        /* Seções */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #ED6711;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #ED6711;
+            padding-bottom: 10px;
+        }
+
+        /* Aviso destaque */
+        .highlight-notice {
+            background-color: #ED6711;
+            color: #000000;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Tabela de pizzas */
+        .pizza-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .pizza-item {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #ED6711;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pizza-content {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .pizza-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+            border: 2px solid #ED6711;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ED6711;
+            font-size: 2rem;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .pizza-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 6px;
         }
-        
-        .header-shadow {
-            box-shadow: 0 4px 20px rgba(237, 103, 17, 0.15);
+
+        .pizza-info {
+            flex: 1;
+        }
+
+        .pizza-name {
+            color: #ED6711;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .pizza-ingredients {
+            color: #cccccc;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .pizza-prices {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+        }
+
+        .price-item {
+            background-color: #1a1a1a;
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid #444;
+        }
+
+        .size {
+            color: #ED6711;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .price {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-top: 2px;
+        }
+
+        /* Rodapé */
+        .footer {
+            background-color: #000000;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer-info {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .address {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #cccccc;
+        }
+
+        .whatsapp {
+            background-color: #ED6711;
+            color: #000000;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp:hover {
+            background-color: #d55a0e;
+            transform: translateY(-2px);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .container {
+                padding: 100px 15px 15px;
+            }
+
+            .pizza-prices {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .highlight-notice {
+                font-size: 1rem;
+                padding: 12px;
+            }
+
+            .pizza-image {
+                width: 70px;
+                height: 70px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .pizza-name {
+                font-size: 1.2rem;
+            }
+
+            .pizza-ingredients {
+                font-size: 0.9rem;
+            }
+
+            .pizza-prices {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .price-item {
+                padding: 6px;
+            }
+
+            .whatsapp {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .pizza-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .pizza-image {
+                width: 60px;
+                height: 60px;
+                align-self: center;
+            }
+        }
+
+        /* Animações */
+        .pizza-item {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pizza-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(237, 103, 17, 0.2);
+        }
+
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
-<body class="bg-black text-white min-h-screen">
-    <!-- Header Fixo -->
-    <header class="fixed top-0 w-full bg-secondary z-50 header-shadow">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center justify-center">
-                <div class="flex items-center space-x-3">
-                    <i data-feather="pizza" class="text-primary w-8 h-8"></i>
-                    <h1 class="text-xl font-bold">MPH PIZZARIA – Cardápio Virtual</h1>
-                </div>
-            </div>
-        </div>
+<body>
+    <!-- Header fixo -->
+    <header class="header">
+        <div class="logo">MPH PIZZARIA</div>
+        <div class="subtitle">Cardápio Virtual</div>
     </header>
 
-    <!-- Conteúdo Principal -->
-    <main class="pt-20 pb-24 container mx-auto px-4">
-        <!-- Aviso Destaque -->
-        <div class="bg-primary/20 border border-primary/30 rounded-xl p-4 mb-8">
-            <div class="flex items-center">
-                <i data-feather="gift" class="text-primary mr-3"></i>
-                <p class="font-semibold">Refrigerante incluso nas pizzas a partir de 35 cm</p>
-            </div>
-        </div>
-
-        <!-- Pizzas Tradicionais -->
-        <section class="mb-12">
-            <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
-                <i data-feather="star" class="mr-2"></i>
-                Pizzas Tradicionais
-            </h2>
+    <!-- Container principal -->
+    <div class="container">
+        <!-- Seção Pizzas Tradicionais -->
+        <section class="section">
+            <h2 class="section-title">🍕 Pizzas Tradicionais</h2>
             
-            <div class="pizza-table">
-                <!-- Exemplo de item de pizza - repetir para cada sabor -->
-                <div class="pizza-card">
-                    <h3 class="text-lg font-semibold mb-2">Margherita</h3>
-                    <p class="text-gray-300 text-sm mb-3">Molho de tomate, mussarela, manjericão fresco</p>
-                    <div class="price-grid">
+            <div class="pizza-grid">
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Muçarela</div>
+                            <div class="pizza-ingredients">Molho, muçarela, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
                         <div class="price-item">
-                            <div class="text-xs text-gray-400">25cm</div>
-                            <div class="font-bold">R$ 35,00</div>
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
                         </div>
                         <div class="price-item">
-                            <div class="text-xs text-gray-400">35cm</div>
-                            <div class="font-bold">R$ 45,00</div>
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
                         </div>
                         <div class="price-item">
-                            <div class="text-xs text-gray-400">40cm</div>
-                            <div class="font-bold">R$ 55,00</div>
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
                         </div>
                         <div class="price-item">
-                            <div class="text-xs text-gray-400">45cm</div>
-                            <div class="font-bold">R$ 65,00</div>
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Adicione mais pizzas tradicionais aqui seguindo o mesmo padrão -->
-            </div>
-        </section>
 
-        <!-- Pizzas Doces -->
-        <section class="mb-12">
-            <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
-                <i data-feather="heart" class="mr-2"></i>
-                Pizzas Doces
-            </h2>
-            
-            <div class="pizza-table">
-                <!-- Exemplo de pizza doce - repetir para cada sabor -->
-                <div class="pizza-card">
-                    <h3 class="text-lg font-semibold mb-2">Chocolate com Morango</h3>
-                    <p class="text-gray-300 text-sm mb-3">Chocolate, morangos frescos, leite condensado</p>
-                    <div class="price-grid">
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Marguerita</div>
+                            <div class="pizza-ingredients">Molho, muçarela, tomate, manjericão, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
                         <div class="price-item">
-                            <div class="text-xs text-gray-400">25cm</div>
-                            <div class="font-bold">R$ 40,00</div>
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
                         </div>
                         <div class="price-item">
-                            <div class="text-xs text-gray-400">35cm</div>
-                            <div class="font-bold">R$ 50,00</div>
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
                         </div>
                         <div class="price-item">
-                            <div class="text-xs text-gray-400">40cm</div>
-                            <div class="font-bold">R$ 60,00</div>
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
                         </div>
                         <div class="price-item">
-                            <div class="text-xs text-gray-400">45cm</div>
-                            <div class="font-bold">R$ 70,00</div>
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Adicione mais pizzas doces aqui seguindo o mesmo padrão -->
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Calabresa</div>
+                            <div class="pizza-ingredients">Molho, muçarela, calabresa, cebola, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Bacon</div>
+                            <div class="pizza-ingredients">Molho, muçarela, bacon, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Bauru</div>
+                            <div class="pizza-ingredients">Molho, muçarela, presunto, tomate, azeitona, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Alho</div>
+                            <div class="pizza-ingredients">Molho, muçarela, alho torrado, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Mista</div>
+                            <div class="pizza-ingredients">Molho, muçarela, calabresa, presunto, cebola, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Caipira</div>
+                            <div class="pizza-ingredients">Molho, muçarela, frango, ovos, milho, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 30,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 37,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 47,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 57,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Frango c/ Catupiry</div>
+                            <div class="pizza-ingredients">Molho, muçarela, frango, catupiry, cebola, azeitona, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 30,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 37,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 47,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 57,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Franbacon</div>
+                            <div class="pizza-ingredients">Molho, muçarela, frango, bacon, azeitona, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 30,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 37,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 47,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 57,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Bacon com Ovos</div>
+                            <div class="pizza-ingredients">Molho, muçarela, bacon, ovos, cebola, azeitona, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 30,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 37,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 47,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 57,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Paulista</div>
+                            <div class="pizza-ingredients">Molho, muçarela, presunto, bacon, catupiry, cebola, azeitona, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 30,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 37,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 47,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 57,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Portuguesa</div>
+                            <div class="pizza-ingredients">Molho, muçarela, calabresa, presunto, ovos, tomate, cebola, pimentão, azeitona, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 30,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 37,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 47,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 57,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Atum</div>
+                            <div class="pizza-ingredients">Molho, muçarela, atum, tomate, cebola, pimentão, azeitona, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 30,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 37,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 47,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 57,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍕
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Camarão</div>
+                            <div class="pizza-ingredients">Molho, muçarela, camarão, orégano</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 40,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 50,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 60,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 70,00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-notice">
+                ⚠️ Refrigerante incluso nas pizzas a partir de 35 cm
             </div>
         </section>
-    </main>
 
-    <!-- Rodapé Fixo -->
-    <footer class="fixed bottom-0 w-full bg-secondary py-4 border-t border-gray-800">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="text-center md:text-left mb-2 md:mb-0">
-                    <p class="text-sm">Rua Exemplo, 123 – Nova Iguaçu, RJ</p>
+        <!-- Seção Pizzas Doces -->
+        <section class="section">
+            <h2 class="section-title">🍯 Pizzas Doces</h2>
+            
+            <div class="pizza-grid">
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍫
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Chocolate</div>
+                            <div class="pizza-ingredients">Chocolate ao leite ou chocolate branco</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
                 </div>
-                <a href="https://wa.me/5521999999999" class="bg-primary hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full flex items-center transition-colors">
-                    <i data-feather="phone" class="mr-2"></i>
-                    (21) 99999-9999
-                </a>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍫
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Confete</div>
+                            <div class="pizza-ingredients">Chocolate ao leite, M&M</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍓
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Sensação</div>
+                            <div class="pizza-ingredients">Chocolate ao leite, morango</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🥥
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Prestígio</div>
+                            <div class="pizza-ingredients">Chocolate ao leite, coco ralado</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍫
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Mesclado</div>
+                            <div class="pizza-ingredients">Chocolate preto e chocolate branco</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍯
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Romeu e Julieta</div>
+                            <div class="pizza-ingredients">Muçarela, goiabada</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍌
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Banana c/ Canela</div>
+                            <div class="pizza-ingredients">Muçarela, banana, canela, açúcar</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 27,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 32,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 42,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 52,00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pizza-item">
+                    <div class="pizza-content">
+                        <div class="pizza-image">
+                            🍌
+                        </div>
+                        <div class="pizza-info">
+                            <div class="pizza-name">Banana Nevada</div>
+                            <div class="pizza-ingredients">Muçarela, banana, açúcar, chocolate branco</div>
+                        </div>
+                    </div>
+                    <div class="pizza-prices">
+                        <div class="price-item">
+                            <div class="size">25cm</div>
+                            <div class="price">R$ 30,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">35cm</div>
+                            <div class="price">R$ 37,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">40cm</div>
+                            <div class="price">R$ 47,00</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="size">45cm</div>
+                            <div class="price">R$ 57,00</div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footer-info">
+            <div class="address">
+                📍 Rua Exemplo, 123 – Nova Iguaçu, RJ
+            </div>
+            <a href="https://wa.me/5521999999999" class="whatsapp" target="_blank">
+                📱 (21) 99999-9999 - Fazer Pedido pelo WhatsApp
+            </a>
         </div>
     </footer>
-
-    <script>
-        feather.replace();
-        
-        // Animações simples de entrada
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.pizza-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        });
-    </script>
 </body>
 </html>
